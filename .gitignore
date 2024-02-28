@@ -1,4 +1,5 @@
-venv/
+.venv/
 hangman_game/
 self_taught_programmer_althoff/
 .idea/
+__pycache__/
