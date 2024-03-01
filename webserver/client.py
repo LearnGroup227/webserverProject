@@ -8,14 +8,16 @@ while True:
     if '!' in request:
         break
 
+
 def get_server_data() -> str:
-    data = bytearray()
+    data = bytes()
     while True:
         respond = client_sock.recv(1024)
         if not respond:
             break
         data += respond
     return data.decode('utf-8')
+
 
 print(get_server_data())
 

@@ -2,6 +2,7 @@ import socket
 import sys
 import time
 
+
 def run_server(port=53210):
     serv_sock = create_serv_sock(port)
     cid = 0
@@ -9,6 +10,7 @@ def run_server(port=53210):
         client_sock = accept_client_conn(serv_sock, cid)
         serve_client(client_sock, cid)
         cid += 1
+
 
 def serve_client(client_sock, cid):
     request = read_request(client_sock)
@@ -27,11 +29,13 @@ def create_serv_sock(serv_port):
     serv_sock.listen()
     return serv_sock
 
+
 def accept_client_conn(serv_sock, cid):
     client_sock, client_addr = serv_sock.accept()
     print(f'Client #{cid} connected '
           f'{client_addr[0]}:{client_addr[1]}')
     return client_sock
+
 
 def read_request(client_sock, delimiter=b'!'):
     request = bytearray()
@@ -52,9 +56,11 @@ def read_request(client_sock, delimiter=b'!'):
     except:
         raise
 
+
 def handle_request(request):
-    time.sleep(5)
-    return request[::-1]
+    time.sleep(1)
+    return request.decode('utf-8')[::-1].encode('utf-8')
+
 
 def write_response(client_sock, response, cid):
     client_sock.sendall(response)
